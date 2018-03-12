@@ -1,0 +1,784 @@
+/**
+ * @file
+ * Positioning for a responsive layout.
+ *
+ * Define CSS classes to create a fluid grid layout with optional sidebars
+ * depending on whether blocks are placed in the left or right sidebars.
+ *
+ * This layout uses the Zen Grids plugin for Compass: http://zengrids.com
+ */
+ 
+ /*r:co-pic_test/sites/all/themes/zen_PsychIntern*/
+
+// We are going to create a fluid grid with 1, 3, or 5 columns and 20px gutters
+// between columns (applied as 10px of left/right padding on each column).
+$zen-column-count:  1;
+$zen-gutter-width:  20px;
+
+// If you need IE6/7 support for box-sizing: border-box (default), see _init.scss
+//$zen-box-sizing: content-box;
+
+// You can generate more efficient CSS if you manually apply the
+// zen-grid-item-base mixin to all grid items from within a single ruleset.
+$zen-auto-include-item-base: false;
+// $zen-auto-include-flow-item-base: false;
+
+// Suppress this section of CSS for RTL layouts since it contains no LTR-specific styles.
+@if $zen-reverse-all-floats == false {
+
+/**
+ * Center the page.
+ *
+ * For screen sizes larger than 1200px, prevent excessively long lines of text
+ * by setting a max-width.
+ */
+#page,
+.region-bottom {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  background:#fff;
+}
+
+/* Apply the shared properties of grid items in a single, efficient ruleset. */
+#header,
+#content,
+#navigation,
+.region-sidebar-first,
+.region-sidebar-second,
+#footer {
+  // See the note about $zen-auto-include-item-base above.
+  @include zen-grid-item-base();
+}
+
+#content{
+	margin-top:16px;
+	
+	.view-site-descriptions{
+		h2.field-content{
+			a:link, a:visited, a:active{
+				text-decoration:none;
+				color:#666;
+				&:hover{
+					text-decoration:underline;
+					color:#000;
+				}
+			}
+		}
+	}
+}//end content
+
+
+#footer{
+	border-top:4px solid #16608F;
+	border-bottom:1px solid #000;
+	background:#1B78B2;
+	padding:10px;
+	
+	p{
+		color:#fff;
+		font-size:.9em;
+		line-height:1em;
+		margin:0;
+	}
+	
+	.block{
+		margin-bottom:0;
+	}
+}
+
+/* Containers for grid items and flow items. */
+#header,
+#main,
+#footer {
+  @include zen-grid-container();
+}
+
+/* Navigation bar */
+@media all and (min-width: 480px) {
+	
+  #main {
+    /* Move all the children of #main down to make room. */
+    padding-top: $nav-height;
+    position: relative;
+  }
+  #navigation {
+    /* Move the navbar up inside #main's padding. */
+    position: absolute;
+    top: 0;
+    /*height: $nav-height;*/
+    width: $zen-grid-width;
+  }
+}
+
+.search-box{
+	display:none;
+}
+
+
+} // End of @if $zen-reverse-all-floats == true
+
+/**
+ * Use 3 grid columns for smaller screens.
+ */
+ 
+ @media all and (max-width: 480px) {
+
+  $zen-column-count: 3;
+  
+#page{
+
+	
+  .header{
+	  background:url(../images/hi-pic-banner.jpg) 0 0 no-repeat;
+		position:relative;
+		height:191px;
+				.header__name-and-slogan {
+					position:absolute;
+					top:45px;
+					left:12px;
+					
+					a{
+						text-decoration:none;
+						span{
+							font-family: 'humnst777_cn_btbold';
+						}
+					}
+				}
+		.right-logo{
+			display:none;
+		}
+		}//end header
+		
+		
+			/*mobile nav for phones*/
+			#phone-nav{
+				background:#69a660;
+					.nav-toggle{
+						padding:6px;
+					}
+				
+				.region-phone{
+					#block-menu-menu-phone-menu{
+						.menu{
+							li{
+								border-bottom:1px solid #fff;
+								a:link, a:visited, a:active{
+									display:block;
+									padding:4px 4px 4px 8px;
+									color:#fff;
+									text-decoration:none;
+									font-size:1.3em;
+									background:#538fcd;
+									line-height:1.8em;
+								}
+								
+								li:last-child{
+									border-bottom:none;
+									padding-bottom:6px;
+								}
+								
+								ul{
+									
+									background:#406c99;
+									
+									li a:link, a:active, a:visited{
+										padding:4px 16px 4px 25px;
+										background:#406c99;
+									}
+									
+								}
+							}
+						}
+					}//end block-menu-menu-phone-menu
+				}//end region-phone
+			}//end phone-nav
+			
+		#main{
+			#content{
+				
+				margin-top:0;
+	
+				h1{
+					line-height:1.1em;
+					font-size:1.5em;
+					margin-top:8px;
+				}
+				
+				article{
+					margin-top:30px;
+				}
+
+				p{
+					font-size:115%;
+					margin-top:0;
+				}
+			}//end content
+			
+			//don't display 2nd column consortium menu in right sidebar
+.sidebars{
+		.region-sidebar-second{
+			#block-block-6{
+				display:none;
+			}
+		}//end region-sidebar-second
+		
+		#navigation{	
+				.nice-menu{
+					display:none;
+				}
+			}
+			
+			}//end main
+			
+		}//end page
+ }
+  /*480 to 760px*/
+ @media all and (min-width: 480px) and (max-width: 759px) {
+	 
+	 #page{
+	#header{
+		background:url(../images/hi-pic-banner.jpg) 0 0 no-repeat;
+		position:relative;
+		height:191px;
+		
+/* Wrapper for website name and slogan. */
+.header__name-and-slogan {
+  position: absolute;
+  top:108px;
+  left:150px;
+  h1.site-name, a.header__site-link{
+	  font-weight:100;
+	  letter-spacing:1px;
+	  font-size:1em;
+  }
+}
+		.search-box{
+			width:225px;
+			position:absolute;
+			top:20px;
+			right:5px;
+		}
+		.right-logo{
+			display:none!important;
+		}
+	}
+	
+	#navigation{
+			background:#f0f0f0;
+			padding:4px;
+			overflow:visible;
+			margin:0 0 8px 0;
+			border-bottom:2px solid #ccc;
+			
+				.search-box{
+							display:none;
+					}
+	}
+	
+		#phone-nav, .nav-toggle{
+			display:none;
+		}
+		
+	}//end sidebars
+	
+}//end page  
+			
+ }
+ 
+ /*760px to 959px*/
+@media all and (min-width: 760px) and (max-width: 959px) {
+
+  $zen-column-count: 3;
+
+#page{
+	#header{
+		background:url(../images/hi-pic-banner.jpg) 0 0 no-repeat;
+		position:relative;
+		height:191px;
+		
+				/* Wrapper for website name and slogan. */
+				.header__name-and-slogan {
+				  position: absolute;
+				  top:108px;
+				  left:150px;
+					  h1.site-name, a.header__site-link{
+						  color: #231f20;
+						 font-family: "Open Sans",sans-serif;
+						 font-size: 1em;
+						 font-weight: 700;
+						 letter-spacing: 1px;
+						 text-transform: uppercase;
+					  }
+				}
+		
+		  .search-box{
+			display:block;
+			position:absolute;
+			top:20px;
+			right:12px;
+		}
+		
+		.right-logo{
+			position:absolute;
+			right:35px;
+			top:-12px;
+			
+			img{
+				width:100%;
+				max-width:170px;
+				height:auto; 
+			}
+		}
+	}
+	
+	#navigation{
+			background:#f0f0f0;
+			padding:4px;
+			overflow:visible;
+			margin:0 0 8px 0;
+			border-bottom:2px solid #ccc;
+			
+				.search-box{
+					display:none;
+			}
+			
+			#phone-nav, .nav-toggle{
+			display:none;
+		}
+		
+		
+	}
+	
+}//end page  
+  #phone-nav{
+	  display:none;
+  }
+  
+
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+  .sidebar-first {
+    /* Span 2 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(2, 2);
+	  
+	  .hideme{
+				  display:none;
+			  }
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+  .sidebar-second {
+    /* Span 2 columns, starting in 1st column from left. */
+    #content {
+      @include zen-grid-item(2, 1);
+	  .hideme{
+				  display:none;
+			  }
+    }
+
+    /* Span 1 column, starting in 3rd column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 3);
+    }
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+  .two-sidebars {
+    /* Span 2 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(2, 2);
+	  .hideme{
+				  display:none;
+			  }
+    }
+	
+	
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+
+    /* Start a new row and span all 3 columns. */
+    .region-sidebar-second {
+      @include zen-grid-item(3, 1);
+      @include zen-nested-container(); // Since we're making every block in this region be a grid item.
+      @include zen-clear();
+	  
+	  //don't display 2nd column consortium menu in right sidebar
+			#block-block-6{
+				display:none;
+			}
+
+
+      /* Apply the shared properties of grid items in a single, efficient ruleset. */
+      .block {
+        @include zen-grid-item-base();
+      }
+      /* Span 1 column, starting in the 1st column from left. */
+      .block:nth-child(3n+1) {
+        @include zen-grid-item(1, 1);
+        @include zen-clear();
+      }
+      /* Span 1 column, starting in the 2nd column from left. */
+      .block:nth-child(3n+2) {
+        @include zen-grid-item(1, 2);
+      }
+      /* Span 1 column, starting in the 3rd column from left. */
+      .block:nth-child(3n) {
+        @include zen-grid-item(1, 3);
+      }
+    }
+  }
+}
+
+/**
+ * Use 5 grid columns for larger screens.
+ */
+@media all and (min-width: 960px) {
+
+  $zen-column-count: 5;
+
+#page{
+	#header{
+		background:url(../images/hi-pic-banner.jpg) 0 0 no-repeat;
+		height:192px;
+		position:relative;
+		
+		/* Wrapper for website name and slogan. */
+			.header__name-and-slogan {
+			  position: absolute;
+			  top:70px;
+			  left:50px;
+			  width:550px;
+			  h1.site-name, a.header__site-link{
+				  font-family: 'Open Sans', sans-serif;
+				  color:rgba(35,31,32,1.00);
+				  font-weight:700;
+				  letter-spacing:1px;
+				  text-transform:uppercase;
+				  font-size:1.3em;
+			  }
+			}
+
+		
+		.right-logo{
+			position:absolute;
+			right:35px;
+			top:-12px;
+			
+			img{
+				width:100%;
+				max-width:215px;
+				height:auto; 
+			}
+		}
+		
+		.search-box{
+				display:block;
+				position:absolute;
+				top:30px;
+				right:20px;
+		}
+	}
+	
+	#navigation{
+		background:#f0f0f0;
+		padding:4px;
+		overflow:visible;
+		margin:0 0 8px 0;
+		border-bottom:2px solid #ccc;
+	}
+	
+	#phone-nav, .nav-toggle, {
+		display:none;
+	}
+}//end page
+
+
+
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+  .sidebar-first {
+    /* Span 4 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(4, 2);
+	  border-left:1px solid #ccc;
+	  padding-left:16px;
+	  
+	  p{
+		  margin-top:0;
+	  }
+	  
+	  
+	  
+			  .hideme{
+				  display:none;
+			  }
+			  
+			  .view-site-descriptions{
+				  
+				  .view-content{
+					  .views-row{
+						  border-bottom:1px solid #ccc;
+						  padding-bottom:12px;
+						  margin-bottom:12px;
+						  
+						   h2{
+					 			 margin-bottom:1.5em;
+				  			}				  
+
+						  p{
+							  margin:0 0 1em 0;
+							  line-height:1.5em;
+						  }
+					  }
+				  }			 
+			  }
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+	  
+	  .block{
+		  padding-right:12px;
+	  }
+    }
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+  .sidebar-second {
+    /* Span 4 columns, starting in 1st column from left. */
+    #content {
+      @include zen-grid-item(4, 1);
+	  
+	   .hideme{
+				  display:none;
+			  }
+    }
+
+    /* Span 1 column, starting in 5th column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 5);
+    }
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+  .two-sidebars {
+    /* Span 3 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(3, 2);
+	  
+	   .hideme{
+				  display:none;
+			  }
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+
+    /* Span 1 column, starting in 5th column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 5);
+	  
+			#block-block-6{
+				ul{
+					list-style:none;
+					margin:16px 0 0 0;
+					padding:0;
+					border:1px solid #ccc;
+					
+					li{
+						border-bottom:1px solid #ccc;
+						
+						
+							 a:link, a:active, a:visited{
+									text-decoration:underline;
+									display:block;
+									padding:4px;
+									
+									&:hover{
+										color:#E00F13;
+									}
+								}
+						
+						
+						&:last-child{
+							border-bottom:none;
+						}
+						
+						
+					}
+				}
+			}
+
+
+    }
+  }
+}
+
+
+
+
+
+
+
+
+/*faculty consortium page*/
+.view-consortium-faculty 
+	.faculty-list{
+		h3{
+				clear:left;
+				font-size:1.4em;
+				text-transform:uppercase;
+				margin:0;
+			}
+		ul{
+			margin:0 0 20px;
+			padding:0;
+			overflow:hidden;
+				
+			li{
+				list-style:none;
+				border-bottom:1px solid #ccc;
+				padding:16px 0;
+				overflow:hidden;
+				
+				span.views-field-field-first-name, span.views-field-field-last-name{
+					font-size:1.6em;
+					color:red;
+				}
+				
+				span.views-field-field-faculty-portrait{
+					float:left;
+					margin:9px 12px 0 0;
+				}
+				
+				.views-field-body{
+					float:left;
+					width:75%;
+					padding-right:20px;
+
+				}
+				clear:left;
+			}
+			
+			h3{
+				clear:left;
+			}
+
+		}
+	
+		.view-footer{
+			clear:left;
+		}
+	}
+
+table.hipic-table{
+	width:90%;
+	margin:0 auto;
+	border:1px solid #ccc;
+	
+	caption{
+		font-style: italic;
+		font-weight:bold;
+		font-size:1.1em;
+		/*border-bottom:1px solid #ccc;*/
+	}
+		tr:first-child th.scope-row{
+				background:transparent;
+				color:#000;
+				text-align:left!important;
+				border-left:1px solid #ccc;
+				padding:16px;
+			    font-weight:normal;
+		    }
+	
+	tr:first-child th[scope="col"]{
+				background:#333;
+				color:#fff;
+				/*text-align:left!important;*/
+				border:none;
+				/*padding:16px;*/
+		    }
+	
+			tr th{
+				text-align:left!important;
+				border:none;
+				padding-left:16px;
+			}
+	
+	       tr th.scope-row{
+				text-align:left!important;
+			    border-left:1px solid #ccc;
+				padding-left:16px;
+			    font-weight:normal;
+			}
+	
+	tr th.scope-row:first-child, tr td:first-child{
+		border:none;
+	}
+			
+			tr:nth-child(even) {
+				background: #fff;
+			}
+	
+			tr:nth-child(odd){
+				background:#f1f1f1;
+			}
+			
+			tr td, th{
+				padding:6px;
+			}
+	
+			tr td{
+				border-left:1px solid #ccc;
+				text-align:center;
+			}
+			
+			tr th{
+				/*border:none;*/
+				
+			}
+			
+			tr th.last-updated{
+					font-style:italic;
+					font-size:.8em;
+				}
+	
+	tr:last-child{
+		/*border-bottom:1px solid #ccc;*/
+	}
+	
+	tfoot > tr{
+		background:transparent!important;
+		border-top:1px solid #ccc;
+		
+		td{
+			text-align:left;
+		}
+	}
+}// end hipic-table
