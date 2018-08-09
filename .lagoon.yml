@@ -25,13 +25,8 @@ environments:
     routes:
       - varnish:
         - "www.hi-pic.org":
-            tls-acme: 'false'
+            tls-acme: 'true'
             insecure: Redirect
         - "hi-pic.org":
-            tls-acme: 'false'
+            tls-acme: 'true'
             insecure: Redirect
-            
-  prod:
-    routes:
-      - varnish:
-        - "hi-pic.org" 
