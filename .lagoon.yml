@@ -30,4 +30,8 @@ environments:
         - "hi-pic.org":
             tls-acme: 'false'
             insecure: Redirect
-        
+            
+  prod:
+    routes:
+      - varnish:
+        - "hi-pic.org" 
