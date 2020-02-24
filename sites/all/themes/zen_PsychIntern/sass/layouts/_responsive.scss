@@ -173,18 +173,25 @@ $zen-auto-include-item-base: false;
 									line-height:1.8em;
 								}
 								
+								/*drop down from expanded list item*/
+								ul.menu{
+									li{
+											a:link, a:visited, a:active{
+												background:#599ce2;
+												font-size:1.1em;
+												padding-left:20px;
+											}
+										}
+									}
 								li:last-child{
 									border-bottom:none;
-									padding-bottom:6px;
 								}
-								
 								ul{
 									
 									background:#406c99;
 									
 									li a:link, a:active, a:visited{
 										padding:4px 16px 4px 25px;
-										background:#406c99;
 									}
 									
 								}
